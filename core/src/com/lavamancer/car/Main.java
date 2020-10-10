@@ -13,8 +13,10 @@ import java.util.HashMap;
 
 public class Main extends ApplicationAdapter {
 
-	public static final int SCREEN_WIDTH = 128 * 6;
-	public static final int SCREEN_HEIGHT = 128 * 4;
+//	public static final int SCREEN_WIDTH = 128 * 6;
+//	public static final int SCREEN_HEIGHT = 128 * 4;
+	public static final int SCREEN_WIDTH = 128 * 4;
+	public static final int SCREEN_HEIGHT = 128 * 7;
 
 	SpriteBatch spriteBatch;
 	Camera camera;

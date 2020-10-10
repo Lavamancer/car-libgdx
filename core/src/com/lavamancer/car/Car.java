@@ -12,8 +12,8 @@ public class Car implements Updatable, Drawable {
 
     private static final float SPEED = 60;
     private static final float ACCELERATION = 5;
-    private static final float MAX_ACCELERATION = 9;
-    private static final float MIN_ACCELERATION = -2.5f;
+    private static final float MAX_ACCELERATION = 11.5f;
+    private static final float MIN_ACCELERATION = 0;
 
     Sprite sprite;
     float x = 245;
@@ -27,6 +27,7 @@ public class Car implements Updatable, Drawable {
         sprite = new Sprite(new Texture("car.png"));
         sound = Gdx.audio.newSound(Gdx.files.internal("engine.wav"));
         soundId = sound.loop();
+        sound.setVolume(soundId, 0.15f);
     }
 
     @Override
@@ -41,15 +42,15 @@ public class Car implements Updatable, Drawable {
             if (acceleration < MIN_ACCELERATION) acceleration = MIN_ACCELERATION;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            x -= SPEED * delta;
+            x -= delta * (acceleration + 1) * 20;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            x += SPEED * delta;
+            x += delta * (acceleration + 1) * 20;
         }
 
-        y += (200 * delta) + acceleration;
+        y += (200 * delta) + (acceleration - 2.5f);
 
-        sound.setPitch(soundId, 1 + (acceleration * 0.1f));
+        sound.setPitch(soundId, 1 + ((acceleration - 2.5f) * 0.1f));
     }
 
     @Override

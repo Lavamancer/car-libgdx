@@ -9,39 +9,36 @@ public class Road implements Updatable, Drawable {
     Sprite sprite;
     Car car;
 
-    float firstY;
-    float secondY;
-    float thirdY;
-
+    float[] roads = new float[7];
+    int multiplier;
 
     public Road(Car car) {
         this.car = car;
         sprite = new Sprite(new Texture("background.jpg"));
 
-        firstY = sprite.getHeight();
-        secondY = 0;
-        thirdY = -sprite.getHeight();
+        multiplier = (int) (roads.length / 2f);
+
+        for (int i = 0; i < roads.length; i++) {
+            roads[i] = sprite.getHeight() * (-multiplier + i);
+        }
+
     }
 
     @Override
     public void update(float delta) {
-        if (car.y - thirdY > 180) {
-            firstY += sprite.getHeight();
-            secondY += sprite.getHeight();
-            thirdY += sprite.getHeight();
+        if (car.y - roads[multiplier] > 0) { // 0 1 2 3 4
+            for (int i = 0; i < roads.length; i++) {
+                roads[i] += sprite.getHeight();
+            }
         }
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        sprite.setPosition(0, firstY);
-        sprite.draw(spriteBatch);
-
-        sprite.setPosition(0, secondY);
-        sprite.draw(spriteBatch);
-
-        sprite.setPosition(0, thirdY);
-        sprite.draw(spriteBatch);
+        for (int i = 0; i < roads.length; i++) {
+            sprite.setPosition(0, roads[i]);
+            sprite.draw(spriteBatch);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Camera implements Updatable, Drawable {
 
+    private final static int OFFSET_Y = 180;
     OrthographicCamera camera;
     Car car;
 
@@ -15,12 +16,12 @@ public class Camera implements Updatable, Drawable {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(w, h);
-        camera.zoom = 0.35f;
+        camera.zoom = 0.6f;
     }
 
     @Override
     public void update(float delta) {
-        camera.position.set(car.x + car.sprite.getWidth() / 2, car.y + 60 + car.sprite.getHeight() / 2, 0);
+        camera.position.set(car.x + car.sprite.getWidth() / 2f, car.y + OFFSET_Y + car.sprite.getHeight() / 2f, 0);
         camera.update();
     }
 
