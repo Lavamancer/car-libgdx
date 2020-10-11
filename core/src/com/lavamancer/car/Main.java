@@ -4,28 +4,31 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lavamancer.car.entity.Car;
+import com.lavamancer.car.entity.Entity;
+import com.lavamancer.car.entity.Road;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Main extends ApplicationAdapter {
 
-//	public static final int SCREEN_WIDTH = 128 * 6;
-//	public static final int SCREEN_HEIGHT = 128 * 4;
 	public static final int SCREEN_WIDTH = 128 * 4;
 	public static final int SCREEN_HEIGHT = 128 * 7;
+
+	public static Main instance;
 
 	SpriteBatch spriteBatch;
 	Camera camera;
 	Road road;
 	Car car;
+	public ArrayList<Entity> entities = new ArrayList<>();
+	ArrayList<Entity> entitiesAux = new ArrayList<>();
 
 
 	@Override
 	public void create () {
+		instance = this;
 		spriteBatch = new SpriteBatch();
 		car = new Car();
 		camera = new Camera(car);
@@ -44,11 +47,19 @@ public class Main extends ApplicationAdapter {
 		car.update(delta);
 		camera.update(delta);
 		road.update(delta);
+		entitiesAux.clear();
+		entitiesAux.addAll(entities);
+		for (Entity entity : entitiesAux) {
+			entity.update(delta);
+		}
 
 		spriteBatch.begin();
 		camera.draw(spriteBatch);
 		road.draw(spriteBatch);
 		car.draw(spriteBatch);
+		for (Entity entity : entities) {
+			entity.draw(spriteBatch);
+		}
 		spriteBatch.end();
 	}
 

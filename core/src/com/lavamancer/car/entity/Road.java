@@ -1,10 +1,10 @@
-package com.lavamancer.car;
+package com.lavamancer.car.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Road implements Updatable, Drawable {
+public class Road extends Entity {
 
     Sprite sprite;
     Car car;

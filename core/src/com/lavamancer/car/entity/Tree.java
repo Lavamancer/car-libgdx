@@ -1,4 +1,4 @@
-package com.lavamancer.car;
+package com.lavamancer.car.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

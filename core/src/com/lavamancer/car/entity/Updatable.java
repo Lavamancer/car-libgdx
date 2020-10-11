@@ -1,4 +1,4 @@
-package com.lavamancer.car;
+package com.lavamancer.car.entity;
 
 public interface Updatable {
 

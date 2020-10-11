@@ -3,6 +3,9 @@ package com.lavamancer.car;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lavamancer.car.entity.Car;
+import com.lavamancer.car.entity.Drawable;
+import com.lavamancer.car.entity.Updatable;
 
 public class Camera implements Updatable, Drawable {
 
