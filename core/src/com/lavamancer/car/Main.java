@@ -6,7 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lavamancer.car.entity.Car;
-import com.lavamancer.car.entity.Entity;
+import com.lavamancer.car.util.Entity;
 import com.lavamancer.car.entity.Road;
 
 import java.util.ArrayList;

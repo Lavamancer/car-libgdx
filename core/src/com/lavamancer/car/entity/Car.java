@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lavamancer.car.Main;
+import com.lavamancer.car.util.Entity;
 
 public class Car extends Entity {
 
@@ -34,11 +35,12 @@ public class Car extends Entity {
     }
 
     private void checkDirt(float delta) {
-        dirtTimer -= delta;
+        float dirtTime = delta * acceleration * 2; // TODO fix time generator
+        dirtTimer -= dirtTime <= 0 ? delta : dirtTime;
         if (dirtTimer <= 0) {
             dirtTimer = MAX_DIRT_TIMER;
-            Main.instance.entities.add(new Dirt(x + 19, y));
-            Main.instance.entities.add(new Dirt(x + 2, y));
+            Main.instance.entities.add(Dirt.newObject(x + 19, y));
+            Main.instance.entities.add(Dirt.newObject(x + 2, y));
         }
     }
 

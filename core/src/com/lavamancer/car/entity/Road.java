@@ -3,6 +3,7 @@ package com.lavamancer.car.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lavamancer.car.util.Entity;
 
 public class Road extends Entity {
 
