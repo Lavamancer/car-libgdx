@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lavamancer.car.entity.Car;
+import com.lavamancer.car.entity.Tree;
 import com.lavamancer.car.util.Entity;
 import com.lavamancer.car.entity.Road;
 
@@ -21,7 +22,7 @@ public class Main extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Camera camera;
 	Road road;
-	Car car;
+	public Car car;
 	public ArrayList<Entity> entities = new ArrayList<>();
 	ArrayList<Entity> entitiesAux = new ArrayList<>();
 
@@ -44,6 +45,8 @@ public class Main extends ApplicationAdapter {
 
 		float delta = Gdx.graphics.getDeltaTime();
 
+		Tree.spawn(delta);
+
 		car.update(delta);
 		camera.update(delta);
 		road.update(delta);
@@ -57,7 +60,8 @@ public class Main extends ApplicationAdapter {
 		camera.draw(spriteBatch);
 		road.draw(spriteBatch);
 		car.draw(spriteBatch);
-		for (Entity entity : entities) {
+		for (int i = entities.size() - 1; i >= 0; i--) {
+			Entity entity = entities.get(i);
 			entity.draw(spriteBatch);
 		}
 		spriteBatch.end();

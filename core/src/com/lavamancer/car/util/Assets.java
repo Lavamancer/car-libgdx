@@ -11,15 +11,15 @@ public class Assets {
         return instance;
     }
 
-    private AssetManager assetManager = new AssetManager();
+    private final AssetManager assetManager = new AssetManager();
 
 
-    public <T> T load(String assetPath, Class clazz) {
+    public <T> T load(String assetPath, Class<T> clazz) {
         if (!assetManager.contains(assetPath)) {
             assetManager.load(assetPath, clazz);
             assetManager.finishLoading();
         }
-        return (T) assetManager.get(assetPath, clazz);
+        return assetManager.get(assetPath, clazz);
     }
 
 }

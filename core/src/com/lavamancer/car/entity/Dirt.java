@@ -18,8 +18,9 @@ public class Dirt extends Entity {
     float timeLife;
     float alpha;
 
-    private static ArrayList<Dirt> pool = new ArrayList<>(); // TODO make generic
-    public static Dirt newObject(float x, float y) {
+    private final static ArrayList<Dirt> pool = new ArrayList<>(); // TODO make generic
+
+    public static Dirt create(float x, float y) {
         if (pool.isEmpty()) {
             return new Dirt(x, y);
         } else {
@@ -35,8 +36,8 @@ public class Dirt extends Entity {
         Main.instance.entities.remove(this);
     }
 
-    public Dirt(float x, float y) {
-        sprite = new Sprite((Texture) Assets.getInstance().load("dirt.png", Texture.class));
+    private Dirt(float x, float y) {
+        sprite = new Sprite(Assets.getInstance().load("dirt.png", Texture.class));
         init(x, y);
     }
 

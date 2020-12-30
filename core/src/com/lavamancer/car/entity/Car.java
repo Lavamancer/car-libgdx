@@ -19,9 +19,11 @@ public class Car extends Entity {
     public Sprite sprite;
     public float x = 245;
     public float y = 20;
-    public float acceleration = 0;
+    public float acceleration;
     Sound sound;
     long soundId;
+    private float angleSpeed;
+    private float rotation;
 
     private static final float MAX_DIRT_TIMER = 0.1f;
     float dirtTimer = MAX_DIRT_TIMER;
@@ -39,9 +41,13 @@ public class Car extends Entity {
         dirtTimer -= dirtTime <= 0 ? delta : dirtTime;
         if (dirtTimer <= 0) {
             dirtTimer = MAX_DIRT_TIMER;
-            Main.instance.entities.add(Dirt.newObject(x + 19, y));
-            Main.instance.entities.add(Dirt.newObject(x + 2, y));
+            Main.instance.entities.add(Dirt.create(x + 19, y));
+            Main.instance.entities.add(Dirt.create(x + 2, y));
         }
+    }
+
+    private void checkAngle(float delta) {
+        rotation = -angleSpeed * 4f * delta;
     }
 
     @Override
@@ -55,11 +61,14 @@ public class Car extends Entity {
             acceleration -= ACCELERATION * delta;
             if (acceleration < MIN_ACCELERATION) acceleration = MIN_ACCELERATION;
         }
+        angleSpeed = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            x -= delta * (acceleration + 1) * 20;
+            angleSpeed = (acceleration + 1) * -20;
+            x += delta * angleSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            x += delta * (acceleration + 1) * 20;
+            angleSpeed = (acceleration + 1) * 20;
+            x += delta * angleSpeed;
         }
 
         y += (200 * delta) + (acceleration - 2.5f);
@@ -67,10 +76,14 @@ public class Car extends Entity {
         sound.setPitch(soundId, 1 + ((acceleration - 2.5f) * 0.1f));
 
         checkDirt(delta);
+        checkAngle(delta);
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(sprite, x, y);
+        sprite.setPosition(x, y);
+        sprite.setRotation(rotation);
+        sprite.draw(spriteBatch);
     }
+
 }
